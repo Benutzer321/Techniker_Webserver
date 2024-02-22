@@ -38,6 +38,7 @@
             // Fügen Sie bei Bedarf weitere Logik hinzu, um die URL basierend auf den Benutzereingaben zu konstruieren
             window.location.href = `/Vokabeln/${encodeURIComponent(letters)}/${encodeURIComponent(quantity)}`;
         });
+
     });
     if ("{{ Fehler | safe}}" !== "False"){
         alert("{{ Fehler | safe}}");
