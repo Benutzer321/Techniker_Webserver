@@ -1,0 +1,19 @@
+bar magnet : Stabmagnet
+base : Base, Lauge
+be fluent in a language, v : eine Sprache fließend sprechen
+be fooled, v : sich täuschen
+be responsible for, v : verantwortlich sein für
+be worried about, v : sich Sorgen machen über
+bill of material : Materialliste
+billing : das Schreiben von Rechnungen
+bimetallic switch : Bimetallschalter
+blackout : Stromausfall
+block diagram : Blockschaltbild
+blow, v : durchbrennen
+boiler : Heizkessel, Dampfkessel
+branch : Niederlassung, Zweigstelle, Filiale
+brief : kurz
+building site : Baustelle
+business people : Geschäftsleute
+button cell : Knopfzelle
+button magnet : Knopfmagnet

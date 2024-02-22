@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vocabulary Learning App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 90%;
+            max-width: 500px;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        .word-display {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .submit-btn, .next-btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .submit-btn:disabled,
+        .next-btn:disabled {
+            background-color: #ccc;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+</head>
+</head>
+<body>
+    <div class="container">
+        <div class="word-display" id="wordDisplay">Word</div>
+        <input type="text" id="answerInput" class="input-field" placeholder="Enter translation">
+        <button id="submitBtn" class="submit-btn">Submit</button>
+        <button id="nextBtn" class="next-btn" disabled>Next</button>
+    </div>
+
+    <script>
+        const wordDisplay = document.getElementById('wordDisplay');
+        const answerInput = document.getElementById('answerInput');
+        const submitBtn = document.getElementById('submitBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        let currentWord = [];
+        let score = 0;
+
+        let words = {{ Vocabeln | safe}}
+
+        function updateWordDisplay(){
+            if (words.length === 0) {
+                wordDisplay.textContent = "Dein ergebnis ist: " + score;
+
+            }
+            answerInput.setAttribute("placeholder", "Enter translation")
+            currentWord = words.pop();
+            wordDisplay.textContent = currentWord[0];
+            value = 1;
+
+        }
+        let Test = 0
+        let value = 1;
+
+        submitBtn.addEventListener('click', function(){
+            var hash = CryptoJS.SHA1(answerInput.value)
+            if(currentWord[1].includes(hash.toString(CryptoJS.enc.Hex))){
+                score += value;
+                submitBtn.disabled = true;
+                nextBtn.disabled = false;
+                answerInput.style.backgroundColor = "#caff70"
+                return;
+            }
+            console.log(Test)
+            Test = Test + 1
+            answerInput.value = "";
+
+            if ( value === 0.5){
+                submitBtn.disabled = true;
+                nextBtn.disabled = false;
+                answerInput.style.backgroundColor = "#fca9ad"
+                return;
+            }
+            value = 0.5;
+            answerInput.setAttribute("placeholder", currentWord[2]);
+
+        });
+
+        nextBtn.addEventListener('click', function() {
+            // Load next word (placeholder functionality)
+            answerInput.style.backgroundColor= ""
+            updateWordDisplay();
+            answerInput.value = '';
+            submitBtn.disabled = false;
+            nextBtn.disabled = true;
+        });
+
+        document.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                if(submitBtn.disabled === true) {
+                    nextBtn.click();
+                    return
+                }
+                submitBtn.click();
+    }
+});
+
+        updateWordDisplay();
+    </script>
+</body>
+</html>

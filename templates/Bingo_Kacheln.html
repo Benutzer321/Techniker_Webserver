@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bingo Spiel mit Begriffen</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .bingo-card {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 4px;
+            width: 100%;
+            max-width: 600px; /* Maximale Breite der Karte */
+        }
+        .bingo-cell {
+            aspect-ratio: 1 / 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            color: black;
+            font-size: 1rem; /* Basisgröße, passt sich ggf. an */
+            font-weight: bold;
+            user-select: none;
+            cursor: pointer;
+            padding: 10px;
+            border: 2px solid transparent;
+            word-break: break-word; /* Stellt sicher, dass lange Wörter umgebrochen werden */
+            text-align: center;
+        }
+        .marked {
+            border-color: #4CAF50;
+            background-color: #f0f0f0;
+        }
+        #bingoContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh; /* Vollbildhöhe */
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div id="bingoContainer">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl text-center mb-4">Bingo Spiel</h1>
+            <div id="bingoCard" class="bingo-card">
+                <!-- Bingo Zellen werden hier mit JS eingefügt -->
+            </div>
+            <button id="generateCard" class="mt-4 px-4 py-2 bg-blue-500 text-white font-bold rounded hover:bg-blue-700">Neue Karte generieren</button>
+            <div id="bingoMessage" class="text-2xl text-center mt-4 hidden">Bingo!</div>
+        </div>
+    </div>
+
+    <script>
+        const bingoSize = 5; // Größe der Bingo-Karte (5x5)
+        let card = [];
+        const terms = {{ Begriffe | safe}}
+
+        document.getElementById('generateCard').addEventListener('click', generateBingoCard);
+
+        function generateBingoCard() {
+            const bingoCard = document.getElementById('bingoCard');
+            bingoCard.innerHTML = '';
+            card = []; // Kartenstatus zurücksetzen
+            let shuffledTerms = shuffleArray([...terms]); // Begriffe mischen
+            for (let i = 0; i < bingoSize * bingoSize; i++) {
+                const cell = document.createElement('div');
+                cell.classList.add('bingo-cell');
+                const term = shuffledTerms[i];
+                cell.textContent = term;
+                if (term === "Frei") cell.classList.add('marked'); // Freiraum vorab markieren
+                cell.addEventListener('click', () => markCell(cell, Math.floor(i / bingoSize), i % bingoSize));
+                bingoCard.appendChild(cell);
+                if (!card[Math.floor(i / bingoSize)]) card[Math.floor(i / bingoSize)] = [];
+                card[Math.floor(i / bingoSize)][i % bingoSize] = (term === "Frei") ? true : false; // Initialer Zellenstatus
+            }
+            document.getElementById('bingoMessage').classList.add('hidden'); // Bingo-Nachricht verstecken
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]]; // Elemente tauschen
+            }
+            return array;
+        }
+
+        function markCell(cell, row, col) {
+            cell.classList.toggle('marked');
+            card[row][col] = !card[row][col]; // Zellenstatus aktualisieren
+            checkBingo();
+        }
+
+        function checkBingo() {
+            let bingo = false;
+            for (let i = 0; i < bingoSize; i++) {
+                if (card[i].every(val => val) || card.map(row => row[i]).every(val => val)) {
+                    bingo = true;
+                    break;
+                }
+            }
+            if (!bingo) {
+                const diag1 = [...Array(bingoSize).keys()].map(i => card[i][i]);
+                const diag2 = [...Array(bingoSize).keys()].map(i => card[i][bingoSize - 1 - i]);
+                bingo = diag1.every(val => val) || diag2.every(val => val);
+            }
+            if (bingo) document.getElementById('bingoMessage').classList.remove('hidden');
+        }
+
+        generateBingoCard(); // Initial eine Bingo-Karte generieren
+    </script>
+</body>
+</html>

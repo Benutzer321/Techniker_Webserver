@@ -1,0 +1,92 @@
+cable : Kabel
+cable clip : Kabelschelle
+cable drum : Kabeltrommel
+cable reel : Kabeltrommel
+calculate, v : (mit)rechnen, ausrechnen
+(pocket) calculator : Taschenrechner
+calm, v : beruhigen
+campus : Gelände einer Schule oder Universität
+capacitive proximity sensor : kapazitiver Näherungssensor
+capacitor : Kondensator
+car park : Parkplätze
+caravan : Wohnwagen
+carbon : Kohlenstoff
+carbon brush : Kohlebürste
+carbon dioxide : Kohlendioxid
+careful : sorgfältig
+case : Hülle
+casing : Gehäuse
+casual : leger
+catalogue : Katalog
+cause, v : verursachen
+ceiling : Decke
+chain : Kette
+change, v : wechseln
+charge : Ladung
+cheap : billig
+check, v : überprüfen, abhaken
+chew, v : kauen
+chisel : Meißel
+circle : Kreis
+circuit : Schaltung, Schaltschema, Stromkreis
+circuit breaker : Stromunterbrecher, Leitungsschutzschalter (LSSchalter) 
+circuit diagram : Schaltbild
+client : Client (in einem Client-Server-System)
+clip, v : mit Kabelschellen befestigen
+clipped to the surface : auf Putz verlegt
+closed-loop control system : Regelung, geschlossenes Regelsystem
+cloth : Tuch
+CNC (control) system : CNC Steuerung
+coal : Kohle
+coffee break : Kaffeepause
+coil : Spule
+common : häufig, gebräuchlich / (etwas gemeinsam haben)
+commutator : Kollektor
+compare, v : vergleichen
+compared with : im Vergleich zu
+complete : vollständig
+complete, v : abschließen
+complimentary close : Schlussfloskel, Schlussformel
+component : Baustein, Bauteil
+concealed under : plaster unter Putz verlegt
+conclusion : Schlussfolgerung
+conduct, v : leiten
+conductor : Leiter
+conduit : Leerrohr
+confirm, v : bestätigen
+connect in series, v : durch serielle Schaltung verbinden
+connect, v : verbinden
+connected in series : in Reihen geschaltet, Reihenschaltung
+connection socket : Anschlussbuchse
+consist of, v : bestehen aus
+constantly : fortwährend
+consult, v : zu Rate ziehen
+consumer : Verbraucher
+contact : Kontakt
+contactor : Schütz
+continually : fortwährend
+contract : Vertrag
+control, v : regulieren, regeln, steuern
+control system : Steuerung-/Regelungssystem
+control voltage : Steuerspannung
+convert, v : umwandeln
+convince, v : überzeugen
+cooker : Herd
+copper : Kupfer
+cord Anschlusskabel, : Kabel
+cordless phone : schnurloses Telefon
+core : Kern (Leiter, Ader)
+correspondence : Schriftverkehr
+cottage : kleines Landhaus
+cover, v : bedecken, umhüllen
+covering letter : Begleitschreiben, Bewerbungsschreiben
+cracked : rissig, gesprungen
+crane : Kran
+create, v : erzeugen
+cruise line : Kreuzfahrtlinie
+current : Strom, Stromstärke
+currently : zur Zeit
+customer : Kunde
+customer service : Kundendienst
+cycle : Periode, Zyklus
+cylindrical : zylindrisch

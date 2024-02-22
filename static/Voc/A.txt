@@ -1,0 +1,48 @@
+abroad : im Ausland
+access : Zugang
+access point : Anschlussknoten, Zugangsknoten
+accommodation : Unterkunft
+accompany, v : begleiten
+according to : laut, nach
+accounting : Buchhaltung
+accredited : offiziell anerkannt, akkreditiert
+accumulator : Akkumulator
+accurately : genau
+actuator : Aktor, Stellglied, Stellantrieb
+ad (advertisement) : Anzeige
+adhesive tape : Klebeband
+adjust, v : anpassen, justieren
+adult : Erwachsener
+advantage : Vorteil
+advertise, v : werben für
+advertising : Werbung
+agree, v : zustimmen
+align, v : sich ausrichten
+alternating : abwechselnd
+alternating current : Wechselstrom
+ammeter : Amperemeter
+amount to, v : betragen
+amperage : Amperezahl
+appliance : elektrisches Gerät
+applicant : Bewerber(in)
+application : Anwendung
+apply for, v : sich bewerben
+apply, v : Spannung anlegen
+appointment :Termin
+apprentice : Auszubildende(r)
+apprenticeship : Lehre, Ausbildungsverhältnis
+appropriately : passend, angemessen
+armature : Anker
+arrow : Pfeil
+as soon as possible : so bald wie möglich
+ash : Asche
+associate with, v : mit etwas in Verbindung bringen
+at sea : auf See
+attachment : Anhang
+attract, v : (sich) anziehen
+audience : Zuhörer
+auto recovery : automatischer Wiederanlauf
+auto-transformer : Spartransformator
+automatic circuit breaker:  Sicherungsautomat
+available : vorhanden, verfügbar
+avoid, v : vermeiden
