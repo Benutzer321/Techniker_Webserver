@@ -4,6 +4,8 @@ import random
 import hashlib
 from functools import cache
 
+import re
+pattern = r"\(.*?\)|\n"
 
 Vocabeln = {}
 
@@ -11,14 +13,14 @@ def read_voc():
 
     for file_name in os.listdir("static/Voc"):
         i = 0
-        with open(f"static/Voc/{file_name}") as f:
+        with open(f"static/Voc/{file_name}", "r", encoding="utf-8") as f:
             file_name = file_name.removesuffix(".txt")
             content = f.readline()
             Vocabeln[file_name] = {}
             while content != "" and content != "\n":
                 voc_pair = content.split(":")
-                voc_pair[0] = voc_pair[0].rstrip(" ").removesuffix(", v").split(", ")
-                voc_pair[1] = voc_pair[1].strip(" \n").removesuffix("(in)").removesuffix("(r)").split(", ")
+                voc_pair[0] = re.sub(pattern, "", voc_pair[0].rstrip(" ").removesuffix(", v")).split(", ")
+                voc_pair[1] = re.sub(pattern, "", voc_pair[1]).split(", ")
                 i += 1
                 content = f.readline()
                 Vocabeln[file_name][i] = voc_pair
@@ -26,12 +28,11 @@ def read_voc():
 def randomize(n, letters):
 
     Rand_Voc = {}
-    anzahl = int(n/len(letters))
-    for i, letter in enumerate(letters):
-        Keys = list(Vocabeln[letter].keys())
-        while len(Rand_Voc) < (1+ i) * anzahl:
-            temp = random.choice(Keys)
-            Rand_Voc[f"{letter}:{temp:04d}"] = Vocabeln[letter][temp]
+
+    while len(Rand_Voc) < n:
+        key = random.choice(letters)
+        element = random.randint(1, len(Vocabeln[key]))
+        Rand_Voc[f"{key}:{element:04d}"] = Vocabeln[key][element].copy()
 
     for i in Rand_Voc.values():
         if random.randint(0,1):
@@ -69,8 +70,21 @@ def format(voc):
 
 def get_vocabulary(n,Letters):
 
-    voc = randomize(n, Letters)
-    return format(voc)
+    for letter in Letters:
+        if letter not in Vocabeln.keys():
+            return None
+    if n > sum([len(Vocabeln[letter]) for letter in Letters]):
+        return None
+
+    return format(randomize(n, Letters))
+
+def check_parameters(n, Letters):
+    for letter in Letters:
+        if letter not in Vocabeln.keys():
+            return "Vokabeln nicht gefunden"
+    if n > sum([len(Vocabeln[letter]) for letter in Letters]):
+        return "Zu viele Vokabeln"
+    
 
 
 read_voc()

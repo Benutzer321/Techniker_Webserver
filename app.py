@@ -1,4 +1,4 @@
-from flask import Flask, render_template,redirect
+from flask import Flask, render_template, redirect, url_for, request
 import Vokabeln
 import json
 
@@ -15,21 +15,20 @@ def hello_world():
     # put application's code here
     return render_template("Bingo_Kacheln.html", Begriffe = json.dumps(Stark))
 
+@app.route("/Vokabeln/<string:letters>/<int:len>")
+def voc_abfragen(letters:str ,len:int):
+
+    fehler = Vokabeln.check_parameters(len, letters)
+
+    if fehler:
+        return redirect(url_for("generate_voc", Fehler=fehler))
+
+    return render_template("Voc_1.html", Vocabeln = json.dumps(Vokabeln.get_vocabulary(len, letters.upper())))
+
 @app.route("/Vokabeln")
-def voc_abfragen():
+def generate_voc():
 
-    Voc = Vokabeln.get_vocabulary(20)
-    return render_template("Voc_1.html", Vocabeln = json.dumps(Voc))
-
-@app.route("/Vokabeln/Generate/<string:letters>/<int:len>")
-def generate_voc(letters,len):
-
-    if not letters.isalnum():
-        return 111
-    if len > 100:
-        return 111
-
-    return Vokabeln.get_vocabulary(len, letters)
+    return render_template("Voc_Home.html", Fehler = request.args.get("Fehler", False))
 
 @app.route("/Vokabeln/get/<string:token>")
 def get_voc(token):

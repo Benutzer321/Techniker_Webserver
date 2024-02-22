@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vokabeln Lernauswahl</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg">
+        <h2 class="text-2xl mb-4">Wähle deine Buchstaben und die Anzahl der Vokabeln</h2>
+        <form id="vocabForm" class="space-y-4">
+            <div>
+                <label for="letters" class="block mb-2">Buchstaben (getrennt durch Komma oder Leerzeichen):</label>
+                <input type="text" id="letters" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Buchstaben, z.B. A, B, C">
+            </div>
+            <div>
+                <label for="quantity" class="block mb-2">Anzahl der Vokabeln:</label>
+                <input type="number" id="quantity" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Anzahl">
+            </div>
+            <button type="submit" class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">Bestätigen</button>
+        </form>
+    </div>
+
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('vocabForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const lettersInput = document.getElementById('letters').value;
+            const quantity = document.getElementById('quantity').value;
+
+            // Verarbeitet die Eingabe, um Leerzeichen und Kommas als Trennzeichen zu nutzen
+            const letters = lettersInput.split(/[\s,]+/).join('');
+
+            // Weiterleitung zu einer neuen Seite mit den ausgewählten Parametern
+            // Ersetzen Sie 'your-destination-url.com' durch Ihre Ziel-URL
+            // Fügen Sie bei Bedarf weitere Logik hinzu, um die URL basierend auf den Benutzereingaben zu konstruieren
+            window.location.href = `/Vokabeln/${encodeURIComponent(letters)}/${encodeURIComponent(quantity)}`;
+        });
+    });
+    if ("{{ Fehler | safe}}" !== "False"){
+        alert("{{ Fehler | safe}}");
+        window.location.href = "/Vokabeln";
+        }
+</script>
+</html>

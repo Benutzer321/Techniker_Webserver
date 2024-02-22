@@ -71,20 +71,31 @@
         let currentWord = [];
         let score = 0;
 
-        let words = {{ Vocabeln | safe}}
+        let words = {{ Vocabeln | safe}};
+
+
+        let keys = Object.keys(words);
+        let len_words = keys.length
+
+        if (typeof keys === undefined)
+            window.location.pathname = "/Vokabeln"
+
+        let current_key
 
         function updateWordDisplay(){
-            if (words.length === 0) {
-                wordDisplay.textContent = "Dein ergebnis ist: " + score;
-
+            if (keys.length === 0) {
+                alert("Dein ergebnis ist: " + score + "/" + len_words)
+                window.location.pathname = "/Vokabeln"
             }
             answerInput.setAttribute("placeholder", "Enter translation")
-            currentWord = words.pop();
+            current_key = keys.splice(Math.floor(Math.random() * keys.length),1)[0];
+
+            currentWord = words[current_key];
+            delete words[current_key]
             wordDisplay.textContent = currentWord[0];
             value = 1;
 
         }
-        let Test = 0
         let value = 1;
 
         submitBtn.addEventListener('click', function(){
@@ -97,13 +108,25 @@
                 return;
             }
             console.log(Test)
-            Test = Test + 1
             answerInput.value = "";
 
             if ( value === 0.5){
                 submitBtn.disabled = true;
                 nextBtn.disabled = false;
                 answerInput.style.backgroundColor = "#fca9ad"
+                fetch(`/Vokabeln/get/${current_key}`)
+                  .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Netzwerkantwort war nicht ok');
+                    }
+                    return response.json(); // Hier wird die Antwort als JSON verarbeitet
+                  })
+                  .then(data => {
+                      wordDisplay.textContent = data[0] + " : " + data[1]; // Verarbeitung der erhaltenen Daten
+                  })
+                  .catch(error => {
+                    console.error('Es gab ein Problem mit dem Fetch-Operation: ', error);
+                  });
                 return;
             }
             value = 0.5;
