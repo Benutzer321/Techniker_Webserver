@@ -56,37 +56,10 @@
 
     <script>
         const bingoSize = 5; // Größe der Bingo-Karte (5x5)
-        let card = [];
-        const terms = {{ Begriffe | safe}}
+        let card = {{ Card | safe}};
 
         document.getElementById('generateCard').addEventListener('click', generateBingoCard);
 
-        function generateBingoCard() {
-            const bingoCard = document.getElementById('bingoCard');
-            bingoCard.innerHTML = '';
-            card = []; // Kartenstatus zurücksetzen
-            let shuffledTerms = shuffleArray([...terms]); // Begriffe mischen
-            for (let i = 0; i < bingoSize * bingoSize; i++) {
-                const cell = document.createElement('div');
-                cell.classList.add('bingo-cell');
-                const term = shuffledTerms[i];
-                cell.textContent = term;
-                if (term === "Frei") cell.classList.add('marked'); // Freiraum vorab markieren
-                cell.addEventListener('click', () => markCell(cell, Math.floor(i / bingoSize), i % bingoSize));
-                bingoCard.appendChild(cell);
-                if (!card[Math.floor(i / bingoSize)]) card[Math.floor(i / bingoSize)] = [];
-                card[Math.floor(i / bingoSize)][i % bingoSize] = (term === "Frei") ? true : false; // Initialer Zellenstatus
-            }
-            document.getElementById('bingoMessage').classList.add('hidden'); // Bingo-Nachricht verstecken
-        }
-
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]]; // Elemente tauschen
-            }
-            return array;
-        }
 
         function markCell(cell, row, col) {
             cell.classList.toggle('marked');
